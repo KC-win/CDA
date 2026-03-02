@@ -9,7 +9,7 @@
 :root{
   --bg:#f5f3ef;--surface:#fff;--surface2:#faf9f7;--border:#e8e3db;
   --text:#1a1714;--muted:#8a8278;--accent:#1e3a5f;--accent2:#c9973a;
-  --green:#27ae60;--red:#c0392b;--radius:10px;
+  --green:#27ae60;--radius:10px;
   --font:'DM Sans',sans-serif;--serif:'DM Serif Display',serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -18,15 +18,38 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,.03) 39px,rgba(0,0,0,.03) 40px),
              repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,.03) 39px,rgba(0,0,0,.03) 40px)}
 .app{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 20px 80px}
+
+/* Header */
 .header{padding:36px 0 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--accent);margin-bottom:32px}
-.brand{font-family:var(--serif);font-size:28px;color:var(--accent);letter-spacing:-.5px}
+.brand{font-family:var(--serif);font-size:28px;color:var(--accent)}
 .brand span{color:var(--accent2)}
 .tagline{font-size:12px;color:var(--muted);margin-top:3px}
 .header-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;letter-spacing:1px;text-transform:uppercase}
+
+/* Broker signature box */
+.broker-sig-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.broker-sig-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.broker-sig-title{font-size:15px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:8px}
+.broker-sig-sub{font-size:12px;color:var(--muted);margin-bottom:14px}
+.sig-saved-pill{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.3);color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;display:none;align-items:center;gap:4px}
+.sig-saved-pill.visible{display:flex}
+.sig-canvas-wrap{border:2px dashed var(--border);border-radius:8px;background:#fafaf8;position:relative;overflow:hidden;cursor:crosshair;touch-action:none;transition:border-color .2s}
+.sig-canvas-wrap.has-sig{border-style:solid;border-color:var(--accent)}
+#broker-sig-canvas{display:block;width:100%;height:110px}
+.sig-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;color:#ccc;pointer-events:none;user-select:none;text-align:center;line-height:1.6}
+.sig-actions{display:flex;gap:8px;margin-top:10px;align-items:center}
+.sig-preview{margin-top:12px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;display:none}
+.sig-preview.visible{display:block}
+.sig-preview-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px}
+.sig-preview img{height:44px;object-fit:contain;object-position:left center}
+
+/* Mode toggle */
 .mode-toggle{display:flex;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:28px}
 .mode-btn{flex:1;font-family:var(--font);font-size:13px;font-weight:600;padding:12px 16px;border:none;cursor:pointer;background:transparent;color:var(--muted);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
 .mode-btn.active{background:var(--accent);color:#fff}
 .mode-btn:not(.active):hover{background:var(--surface2)}
+
+/* Steps */
 .steps{display:flex;margin-bottom:32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .step{flex:1;padding:13px 10px;text-align:center;cursor:pointer;transition:all .2s;border-right:1px solid var(--border)}
 .step:last-child{border-right:none}
@@ -37,17 +60,22 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .step.done{background:var(--accent2)}
 .step.done .step-num,.step.done .step-label{color:#fff}
 .step:hover:not(.active){background:var(--surface2)}
+
+/* Card */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .card-title{font-family:var(--serif);font-size:20px;color:var(--accent);margin-bottom:4px}
 .card-sub{font-size:13px;color:var(--muted);margin-bottom:22px}
+
+/* My agent info */
 .my-info-box{background:rgba(30,58,95,.05);border:1.5px solid rgba(30,58,95,.15);border-radius:10px;padding:16px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
 .my-info-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;flex-shrink:0}
 .my-info-name{font-size:15px;font-weight:700;color:var(--accent)}
 .my-info-detail{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* Forms */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-grid.three{grid-template-columns:1fr 1fr 1fr}
 .col-span-2{grid-column:span 2}
-.col-span-3{grid-column:span 3}
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
 .field input,.field select{font-family:var(--font);font-size:14px;padding:10px 12px;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);outline:none;transition:border-color .2s;width:100%}
@@ -58,32 +86,34 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .section-divider{display:flex;align-items:center;gap:12px;margin:22px 0 16px}
 .section-divider span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);white-space:nowrap}
 .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Commission type */
 .comm-type{display:flex;gap:8px;margin-bottom:20px}
 .comm-type-btn{font-family:var(--font);font-size:13px;font-weight:600;padding:9px 20px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
 .comm-type-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.comm-type-btn:not(.active):hover{border-color:var(--accent);color:var(--accent)}
 
-/* Commission distribution table */
-.comm-dist-table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+/* Commission table */
+.comm-dist-table{width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
 .comm-dist-table th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#fff;background:var(--accent);padding:10px 14px;text-align:left}
 .comm-dist-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
 .comm-dist-table tr:last-child td{border-bottom:none}
-.comm-dist-table tr:nth-child(even){background:var(--surface2)}
+.comm-dist-table tr:nth-child(even) td{background:var(--surface2)}
 .comm-dist-table input{font-family:var(--font);font-size:13px;padding:7px 10px;background:#fff;border:1.5px solid var(--border);border-radius:6px;color:var(--text);outline:none;transition:border-color .2s;width:100%}
 .comm-dist-table input:focus{border-color:var(--accent)}
 .comm-dist-table input[readonly]{background:#f0ede8;color:var(--muted)}
-.row-label{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap}
+.row-label{font-size:13px;font-weight:600}
 .row-label small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:1px}
-.optional-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none}
-.optional-toggle input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.opt-toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer}
+.opt-toggle input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
 .comm-total-row td{background:rgba(30,58,95,.06);font-weight:700;color:var(--accent);font-size:14px;padding:12px 14px;border-top:2px solid var(--accent)}
 .comm-summary-bar{background:rgba(30,58,95,.06);border:1.5px solid rgba(30,58,95,.2);border-radius:10px;padding:16px 20px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.comm-summary-bar-item{text-align:center}
 .csbi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
 .csbi-val{font-size:20px;font-weight:700;color:var(--accent);font-family:var(--serif);margin-top:2px}
 
+/* Buttons */
 .btn-row{display:flex;gap:12px;margin-top:26px;justify-content:flex-end}
 .btn{font-family:var(--font);font-size:14px;font-weight:600;padding:11px 24px;border-radius:9px;border:none;cursor:pointer;transition:all .2s}
+.btn-sm{padding:7px 16px;font-size:13px}
 .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--muted)}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
 .btn-primary{background:var(--accent);color:#fff}
@@ -92,19 +122,22 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .btn-gold:hover{background:#b8862e;transform:translateY(-1px)}
 .btn-green{background:var(--green);color:#fff}
 .btn-green:hover{background:#219a52;transform:translateY(-1px)}
+
 .tab-panel{display:none}
 .tab-panel.active{display:block}
+
+/* Summary */
 .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .summary-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
 .summary-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:3px}
 .summary-value{font-size:14px;font-weight:500}
 .disclaimer{background:#fef9f0;border:1px solid #f0d89a;border-radius:8px;padding:13px;font-size:12px;color:#7a6020;margin-bottom:18px}
 
-/* PDF */
+/* PDF Preview */
 #pdf-preview{display:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:44px;font-size:12px;line-height:1.55;color:#1a1714;box-shadow:0 4px 24px rgba(0,0,0,.08);margin-top:20px}
 #pdf-preview.visible{display:block}
 .pdf-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:14px;margin-bottom:18px;border-bottom:3px solid #1e3a5f}
-.pdf-logo{font-family:var(--serif);font-size:22px;color:#1e3a5f;font-weight:400}
+.pdf-logo{font-family:var(--serif);font-size:22px;color:#1e3a5f}
 .pdf-logo span{color:#c9973a}
 .pdf-brokerage-sub{font-size:10px;color:#8a8278;margin-top:1px;text-transform:uppercase;letter-spacing:1px}
 .pdf-doc-meta{text-align:right;font-size:10px;color:#8a8278;line-height:1.7}
@@ -118,11 +151,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .pdf-row.three{grid-template-columns:1fr 1fr 1fr}
 .pdf-fl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#8a8278;margin-bottom:1px}
 .pdf-fv{font-size:11px;border-bottom:1px solid #d0ccc4;padding-bottom:2px;min-height:18px}
-.pdf-comm-table{width:100%;border-collapse:collapse;margin-top:8px}
+.pdf-comm-table{width:100%;border-collapse:collapse}
 .pdf-comm-table th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;background:#1e3a5f;color:#fff;padding:7px 10px;text-align:left}
 .pdf-comm-table td{padding:8px 10px;border-bottom:1px solid #e8e3db;font-size:11px}
-.pdf-comm-table tr:last-child td{border-bottom:none}
-.pdf-comm-table .sub-row td{font-size:10px;color:#8a8278;background:#faf9f7;padding:5px 10px 5px 20px}
 .pdf-comm-table .total-row{background:#f5f3ef;font-weight:700;color:#1e3a5f;border-top:2px solid #1e3a5f}
 .pdf-comm-table .total-row td{padding:9px 10px;font-size:12px}
 .pdf-agent-row{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;background:#f9f8f6;border:1px solid #e8e3db;border-radius:8px;padding:12px 14px}
@@ -131,25 +162,25 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .pdf-agent-sub{font-size:10px;color:#8a8278}
 .pdf-sig-section{margin-top:22px;padding-top:16px;border-top:2px solid #1e3a5f}
 .pdf-sig-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#1e3a5f;margin-bottom:10px}
-.pdf-auth-text{font-size:10px;color:#555;margin-bottom:14px;line-height:1.5}
-.pdf-sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.pdf-sig-line{border-bottom:1.5px solid #1a1714;height:44px;margin-bottom:4px}
-.pdf-sig-name{font-size:10px;color:#555;margin-bottom:1px}
+.pdf-auth-text{font-size:10px;color:#555;margin-bottom:16px;line-height:1.5}
+.pdf-sig-line{border-bottom:1.5px solid #1a1714;height:54px;margin-bottom:4px}
+.pdf-sig-name{font-size:10px;color:#555;margin-bottom:1px;font-weight:600}
 .pdf-sig-label{font-size:9px;color:#8a8278}
 .pdf-footer{margin-top:18px;padding-top:10px;border-top:1px solid #e8e3db;font-size:9px;color:#8a8278;text-align:center;line-height:1.6}
 
 @media(max-width:600px){
   .form-grid,.form-grid.three{grid-template-columns:1fr}
-  .col-span-2,.col-span-3{grid-column:span 1}
-  .summary-grid{grid-template-columns:1fr}
+  .col-span-2{grid-column:span 1}
   .steps .step-label{display:none}
   .comm-type{flex-direction:column}
+  .summary-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <div class="app">
 
+  <!-- Header -->
   <header class="header">
     <div>
       <div class="brand">KEY <span>CONNECT</span></div>
@@ -157,6 +188,29 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     </div>
     <div class="header-badge">Texas Real Estate</div>
   </header>
+
+  <!-- ── BROKER SIGNATURE SETUP ────────────────────────────────────── -->
+  <div class="broker-sig-card">
+    <div class="broker-sig-header">
+      <div class="broker-sig-title">✍️ Broker Signature
+        <span class="sig-saved-pill" id="sig-saved-pill">✓ Signature saved</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="clearSig()">Clear & Redraw</button>
+    </div>
+    <div class="broker-sig-sub">Draw once — your signature will appear permanently on every CDA.</div>
+    <div class="sig-canvas-wrap" id="sig-canvas-wrap">
+      <canvas id="broker-sig-canvas" width="820" height="110"></canvas>
+      <div class="sig-hint" id="sig-hint">✍️ Sign here with mouse or finger</div>
+    </div>
+    <div class="sig-actions">
+      <button class="btn btn-primary btn-sm" onclick="saveSig()">Save Signature</button>
+      <span id="sig-saved-toast" style="font-size:12px;color:var(--green);font-weight:600;display:none">✓ Saved!</span>
+    </div>
+    <div class="sig-preview" id="sig-preview">
+      <div class="sig-preview-label">Saved signature — will appear on CDA</div>
+      <img id="sig-preview-img" src="" alt="Saved broker signature">
+    </div>
+  </div>
 
   <!-- Mode toggle -->
   <div class="mode-toggle">
@@ -176,7 +230,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   <div class="tab-panel active" id="panel1">
     <div class="card">
       <div class="card-title">Buyer & Seller Information</div>
-      <div class="card-sub">Enter the names and contact details for all parties in the transaction.</div>
+      <div class="card-sub">Enter names and contact details for all parties.</div>
       <div class="section-divider"><span>Seller</span></div>
       <div class="form-grid">
         <div class="field"><label>Seller Full Name</label><input id="seller_name" placeholder="John & Jane Smith" oninput="update()"></div>
@@ -228,113 +282,78 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   <div class="tab-panel" id="panel3">
     <div class="card">
       <div class="card-title">Commission Distribution</div>
-      <div class="card-sub">Select commission side, enter percentages, and the amounts will calculate automatically.</div>
+      <div class="card-sub">Select side and enter percentages — amounts calculate automatically.</div>
 
-      <!-- Side toggle -->
       <div class="comm-type">
         <button class="comm-type-btn active" id="ct-listing" onclick="setCommType('listing')">🏠 Listing Side</button>
         <button class="comm-type-btn" id="ct-buyer" onclick="setCommType('buyer')">🤝 Buyer Side</button>
       </div>
 
-      <!-- Sales price reminder -->
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
         <span style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.8px">Sales Price</span>
         <span style="font-size:18px;font-weight:700;color:var(--accent);font-family:var(--serif)" id="sales_price_display">—</span>
       </div>
 
-      <!-- Commission Distribution Table -->
       <table class="comm-dist-table">
         <thead>
           <tr>
-            <th style="width:38%">Line Item</th>
+            <th style="width:36%">Line Item</th>
             <th style="width:15%">% of Sale</th>
             <th style="width:22%">Amount ($)</th>
-            <th style="width:25%">Paid To</th>
+            <th style="width:27%">Paid To</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Agent Commission -->
           <tr>
-            <td>
-              <div class="row-label">Agent Commission
-                <small>Your earned commission</small>
-              </div>
-            </td>
+            <td><div class="row-label">Agent Commission<small>Your earned commission</small></div></td>
             <td><input id="agent_comm_pct" type="number" step="0.01" placeholder="3.00" oninput="calcComm()"></td>
             <td><input id="agent_comm_amt" readonly placeholder="Auto"></td>
-            <td><input id="agent_comm_to" placeholder="KEY CONNECT" oninput="update()"></td>
+            <td><input id="agent_comm_to" value="KEY CONNECT" oninput="update()"></td>
           </tr>
-          <!-- Brokerage Commission -->
           <tr>
-            <td>
-              <div class="row-label">Brokerage Fee
-                <small>KEY CONNECT split / fee</small>
-              </div>
-            </td>
+            <td><div class="row-label">Brokerage Fee<small>KEY CONNECT split / fee</small></div></td>
             <td><input id="broker_comm_pct" type="number" step="0.01" placeholder="0.00" oninput="calcComm()"></td>
             <td><input id="broker_comm_amt" readonly placeholder="Auto"></td>
             <td><input id="broker_comm_to" value="KEY CONNECT" oninput="update()"></td>
           </tr>
-          <!-- Other -->
           <tr>
-            <td>
-              <div class="row-label">Other Fee
-                <small>Referral / admin / misc</small>
-              </div>
-            </td>
+            <td><div class="row-label">Other / Referral<small>Admin or referral fee</small></div></td>
             <td><input id="other_comm_pct" type="number" step="0.01" placeholder="0.00" oninput="calcComm()"></td>
             <td><input id="other_comm_amt" readonly placeholder="Auto"></td>
             <td><input id="other_comm_to" placeholder="Payable to..." oninput="update()"></td>
           </tr>
-          <!-- Buyer Rebate — optional -->
-          <tr id="rebate-row">
+          <tr>
             <td>
-              <div class="row-label" style="display:flex;align-items:center;gap:8px">
-                <label class="optional-toggle">
-                  <input type="checkbox" id="rebate_enabled" onchange="toggleRebate()">
-                  Buyer Rebate
-                </label>
-                <small style="display:block;color:var(--muted);font-size:11px;margin-top:0">Optional</small>
-              </div>
+              <label class="opt-toggle">
+                <input type="checkbox" id="rebate_enabled" onchange="toggleRebate()">
+                Buyer Rebate
+              </label>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;margin-left:22px">Optional</div>
             </td>
-            <td><input id="rebate_pct" type="number" step="0.01" placeholder="0.00" disabled oninput="calcComm()" style="opacity:.5"></td>
-            <td><input id="rebate_amt" readonly placeholder="Auto" style="opacity:.5"></td>
-            <td><input id="rebate_to" placeholder="Buyer's name" disabled oninput="update()" style="opacity:.5"></td>
+            <td><input id="rebate_pct" type="number" step="0.01" placeholder="0.00" disabled oninput="calcComm()" style="opacity:.45"></td>
+            <td><input id="rebate_amt" readonly placeholder="Auto" style="opacity:.45"></td>
+            <td><input id="rebate_to" placeholder="Buyer name" disabled oninput="update()" style="opacity:.45"></td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="comm-total-row">
-            <td colspan="2"><strong>TOTAL COMMISSION</strong></td>
-            <td id="total_comm_display"><strong>$0.00</strong></td>
+            <td colspan="2">TOTAL COMMISSION</td>
+            <td id="total_comm_display">$0.00</td>
             <td></td>
           </tr>
         </tfoot>
       </table>
 
-      <!-- Summary bar -->
       <div class="comm-summary-bar">
-        <div class="comm-summary-bar-item">
-          <div class="csbi-label">Agent Nets</div>
-          <div class="csbi-val" id="agent_nets_display">$0.00</div>
-        </div>
+        <div><div class="csbi-label">Agent Nets</div><div class="csbi-val" id="agent_nets_display">$0.00</div></div>
         <div style="width:1px;height:40px;background:var(--border)"></div>
-        <div class="comm-summary-bar-item">
-          <div class="csbi-label">Brokerage</div>
-          <div class="csbi-val" id="broker_nets_display">$0.00</div>
-        </div>
+        <div><div class="csbi-label">Brokerage</div><div class="csbi-val" id="broker_nets_display">$0.00</div></div>
         <div style="width:1px;height:40px;background:var(--border)"></div>
-        <div class="comm-summary-bar-item">
-          <div class="csbi-label">Other / Referral</div>
-          <div class="csbi-val" id="other_nets_display">$0.00</div>
-        </div>
-        <div style="width:1px;height:40px;background:var(--border)" id="rebate-divider" style="display:none"></div>
-        <div class="comm-summary-bar-item" id="rebate-summary" style="display:none">
-          <div class="csbi-label">Buyer Rebate</div>
-          <div class="csbi-val" id="rebate_nets_display">$0.00</div>
-        </div>
+        <div><div class="csbi-label">Other</div><div class="csbi-val" id="other_nets_display">$0.00</div></div>
+        <div id="rebate-divider" style="width:1px;height:40px;background:var(--border);display:none"></div>
+        <div id="rebate-summary" style="display:none"><div class="csbi-label">Buyer Rebate</div><div class="csbi-val" id="rebate_nets_display">$0.00</div></div>
       </div>
 
-      <!-- Agent info -->
       <div class="section-divider"><span>Agent on this CDA</span></div>
 
       <div id="my-agent-box" class="my-info-box">
@@ -357,11 +376,11 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
       <div id="setup-my-info" style="display:none;margin-top:16px">
         <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px;font-size:13px;color:#856404;margin-bottom:16px">
-          ✏️ <strong>First time setup:</strong> Enter your info — it saves permanently to this device.
+          ✏️ <strong>First time setup:</strong> Enter your info — saves permanently to this device.
         </div>
         <div class="form-grid">
           <div class="field"><label>Your Full Name</label><input id="my_name" placeholder="Your Name" oninput="saveMyInfo()"></div>
-          <div class="field"><label>Your TREC License #</label><input id="my_license" placeholder="0123456" oninput="saveMyInfo()"></div>
+          <div class="field"><label>TREC License #</label><input id="my_license" placeholder="0123456" oninput="saveMyInfo()"></div>
           <div class="field"><label>Your Phone</label><input id="my_phone" placeholder="(512) 555-0000" oninput="saveMyInfo()"></div>
           <div class="field"><label>Your Email</label><input id="my_email" placeholder="you@keyconnect.com" oninput="saveMyInfo()"></div>
         </div>
@@ -381,7 +400,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     </div>
     <div class="card">
       <div class="card-title">Ready to Generate</div>
-      <div class="card-sub">Review the summary and generate your CDA.</div>
+      <div class="card-sub">Review the summary below then generate your CDA.</div>
       <div class="summary-grid" id="summary-grid"></div>
       <div class="btn-row">
         <button class="btn btn-outline" onclick="goToStep(3)">← Back</button>
@@ -392,56 +411,119 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     <div id="pdf-preview"></div>
   </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
-const MY_KEY = 'kc_my_agent_info';
-let myInfo = JSON.parse(localStorage.getItem(MY_KEY) || '{}');
-let agentMode = 'me';
-let commType = 'listing';
+const MY_KEY  = 'kc_my_agent_info';
+const SIG_KEY = 'kc_broker_sig';
+let myInfo      = JSON.parse(localStorage.getItem(MY_KEY) || '{}');
+let brokerSigImg = localStorage.getItem(SIG_KEY) || '';
+let agentMode   = 'me';
+let commType    = 'listing';
 let currentStep = 1;
+let sigDrawing  = false;
+let sigCanvas, sigCtx;
 
-// ── My Info ───────────────────────────────────────────────────────────────────
+// ── Broker Signature Canvas ───────────────────────────────────────────────────
+function initSigCanvas() {
+  sigCanvas = document.getElementById('broker-sig-canvas');
+  sigCtx    = sigCanvas.getContext('2d');
+  sigCtx.strokeStyle = '#1e3a5f';
+  sigCtx.lineWidth   = 2.5;
+  sigCtx.lineCap     = 'round';
+  sigCtx.lineJoin    = 'round';
+
+  if (brokerSigImg) {
+    const img = new Image();
+    img.onload = () => sigCtx.drawImage(img, 0, 0, sigCanvas.width, sigCanvas.height);
+    img.src = brokerSigImg;
+    document.getElementById('sig-hint').style.display = 'none';
+    document.getElementById('sig-canvas-wrap').classList.add('has-sig');
+    showSigPreview();
+  }
+
+  function getPos(e) {
+    const r = sigCanvas.getBoundingClientRect();
+    const sx = sigCanvas.width  / r.width;
+    const sy = sigCanvas.height / r.height;
+    const src = e.touches ? e.touches[0] : e;
+    return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+  }
+
+  sigCanvas.addEventListener('mousedown',  e => { sigDrawing = true; const p = getPos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x, p.y); document.getElementById('sig-hint').style.display = 'none'; });
+  sigCanvas.addEventListener('mousemove',  e => { if (!sigDrawing) return; const p = getPos(e); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); });
+  sigCanvas.addEventListener('mouseup',    () => sigDrawing = false);
+  sigCanvas.addEventListener('mouseleave', () => sigDrawing = false);
+  sigCanvas.addEventListener('touchstart', e => { e.preventDefault(); sigDrawing = true; const p = getPos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x, p.y); document.getElementById('sig-hint').style.display = 'none'; }, { passive: false });
+  sigCanvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!sigDrawing) return; const p = getPos(e); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); }, { passive: false });
+  sigCanvas.addEventListener('touchend',   () => sigDrawing = false);
+}
+
+function saveSig() {
+  const blank = document.createElement('canvas');
+  blank.width = sigCanvas.width; blank.height = sigCanvas.height;
+  const dataUrl = sigCanvas.toDataURL('image/png');
+  if (dataUrl === blank.toDataURL('image/png')) { alert('Please draw your signature first.'); return; }
+  brokerSigImg = dataUrl;
+  localStorage.setItem(SIG_KEY, dataUrl);
+  document.getElementById('sig-canvas-wrap').classList.add('has-sig');
+  document.getElementById('sig-saved-pill').classList.add('visible');
+  const toast = document.getElementById('sig-saved-toast');
+  toast.style.display = 'inline';
+  setTimeout(() => toast.style.display = 'none', 2500);
+  showSigPreview();
+}
+
+function clearSig() {
+  sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+  brokerSigImg = '';
+  localStorage.removeItem(SIG_KEY);
+  document.getElementById('sig-hint').style.display = 'block';
+  document.getElementById('sig-canvas-wrap').classList.remove('has-sig');
+  document.getElementById('sig-saved-pill').classList.remove('visible');
+  document.getElementById('sig-preview').classList.remove('visible');
+}
+
+function showSigPreview() {
+  document.getElementById('sig-preview-img').src = brokerSigImg;
+  document.getElementById('sig-preview').classList.add('visible');
+  document.getElementById('sig-saved-pill').classList.add('visible');
+}
+
+// ── Agent / Mode ──────────────────────────────────────────────────────────────
 function saveMyInfo() {
   myInfo = { name: v('my_name'), license: v('my_license'), phone: v('my_phone'), email: v('my_email') };
   localStorage.setItem(MY_KEY, JSON.stringify(myInfo));
   refreshMyInfoBox();
-  update();
 }
 
 function refreshMyInfoBox() {
   document.getElementById('my-agent-display-name').textContent = myInfo.name || 'Your Name';
-  document.getElementById('my-license-display').textContent = myInfo.license || '—';
-  document.getElementById('my-phone-display').textContent = [myInfo.phone, myInfo.email].filter(Boolean).join(' · ') || '—';
+  document.getElementById('my-license-display').textContent    = myInfo.license || '—';
+  document.getElementById('my-phone-display').textContent      = [myInfo.phone, myInfo.email].filter(Boolean).join(' · ') || '—';
 }
 
-// ── Mode ──────────────────────────────────────────────────────────────────────
 function setMode(mode) {
   agentMode = mode;
   document.getElementById('mode-me').classList.toggle('active', mode === 'me');
   document.getElementById('mode-other').classList.toggle('active', mode === 'other');
-  document.getElementById('my-agent-box').style.display = mode === 'me' ? 'flex' : 'none';
+  document.getElementById('my-agent-box').style.display      = mode === 'me' ? 'flex' : 'none';
   document.getElementById('other-agent-fields').style.display = mode === 'other' ? 'block' : 'none';
-  document.getElementById('setup-my-info').style.display = (mode === 'me' && !myInfo.name) ? 'block' : 'none';
-  update();
+  document.getElementById('setup-my-info').style.display      = (mode === 'me' && !myInfo.name) ? 'block' : 'none';
 }
 
 function setCommType(type) {
   commType = type;
   document.getElementById('ct-listing').classList.toggle('active', type === 'listing');
-  document.getElementById('ct-buyer').classList.toggle('active', type === 'buyer');
-  update();
+  document.getElementById('ct-buyer').classList.toggle('active',   type === 'buyer');
 }
 
 function toggleRebate() {
-  const enabled = document.getElementById('rebate_enabled').checked;
-  ['rebate_pct', 'rebate_to'].forEach(id => {
-    document.getElementById(id).disabled = !enabled;
-    document.getElementById(id).style.opacity = enabled ? '1' : '0.5';
-  });
-  document.getElementById('rebate_amt').style.opacity = enabled ? '1' : '0.5';
-  document.getElementById('rebate-summary').style.display = enabled ? 'block' : 'none';
-  document.getElementById('rebate-divider').style.display = enabled ? 'block' : 'none';
+  const on = document.getElementById('rebate_enabled').checked;
+  ['rebate_pct','rebate_to'].forEach(id => { document.getElementById(id).disabled = !on; document.getElementById(id).style.opacity = on ? '1' : '.45'; });
+  document.getElementById('rebate_amt').style.opacity = on ? '1' : '.45';
+  document.getElementById('rebate-summary').style.display = on ? 'block' : 'none';
+  document.getElementById('rebate-divider').style.display = on ? 'block' : 'none';
   calcComm();
 }
 
@@ -450,125 +532,106 @@ function goToStep(n) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
   document.getElementById('panel' + n).classList.add('active');
-  document.getElementById('step' + n).classList.add('active');
+  document.getElementById('step'  + n).classList.add('active');
   for (let i = 1; i < n; i++) document.getElementById('step' + i).classList.add('done');
-  for (let i = n; i <= 4; i++) document.getElementById('step' + i).classList.remove('done');
+  for (let i = n; i <= 4;  i++) document.getElementById('step' + i).classList.remove('done');
   currentStep = n;
-  if (n === 3) { refreshSalesPriceDisplay(); }
+  if (n === 3) refreshSalesPriceDisplay();
   if (n === 4) { buildSummary(); buildPDFPreview(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function v(id) { return (document.getElementById(id)?.value || '').trim(); }
-function fmt$(n) { if (!n || isNaN(n) || n == 0) return '$0.00'; return '$' + parseFloat(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtDate(d) {
-  if (!d) return '—';
-  return new Date(d + 'T00:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-}
-function getAgentName()    { return agentMode === 'me' ? (myInfo.name || '') : v('other_agent_name'); }
+function v(id)    { return (document.getElementById(id)?.value || '').trim(); }
+function fmt$(n)  { if (!n || isNaN(n) || +n === 0) return '$0.00'; return '$' + parseFloat(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtDate(d) { if (!d) return '—'; return new Date(d + 'T00:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}); }
+function getAgentName()    { return agentMode === 'me' ? (myInfo.name    || '') : v('other_agent_name');    }
 function getAgentLicense() { return agentMode === 'me' ? (myInfo.license || '') : v('other_agent_license'); }
-function getAgentPhone()   { return agentMode === 'me' ? (myInfo.phone || '') : v('other_agent_phone'); }
-function getAgentEmail()   { return agentMode === 'me' ? (myInfo.email || '') : v('other_agent_email'); }
+function getAgentPhone()   { return agentMode === 'me' ? (myInfo.phone   || '') : v('other_agent_phone');   }
+function getAgentEmail()   { return agentMode === 'me' ? (myInfo.email   || '') : v('other_agent_email');   }
 
 function refreshSalesPriceDisplay() {
-  const price = parseFloat(v('sales_price')) || 0;
-  document.getElementById('sales_price_display').textContent = price > 0 ? fmt$(price) : '—';
+  const p = parseFloat(v('sales_price')) || 0;
+  document.getElementById('sales_price_display').textContent = p > 0 ? fmt$(p) : '—';
 }
 
 // ── Commission Calc ───────────────────────────────────────────────────────────
 function calcComm() {
   const price = parseFloat(v('sales_price')) || 0;
   refreshSalesPriceDisplay();
-
-  const lines = [
-    { pct: 'agent_comm_pct',  amt: 'agent_comm_amt',  disp: 'agent_nets_display'  },
-    { pct: 'broker_comm_pct', amt: 'broker_comm_amt',  disp: 'broker_nets_display' },
-    { pct: 'other_comm_pct',  amt: 'other_comm_amt',   disp: 'other_nets_display'  },
+  const rows = [
+    { pct:'agent_comm_pct',  amt:'agent_comm_amt',  disp:'agent_nets_display'  },
+    { pct:'broker_comm_pct', amt:'broker_comm_amt',  disp:'broker_nets_display' },
+    { pct:'other_comm_pct',  amt:'other_comm_amt',   disp:'other_nets_display'  },
   ];
-
   let total = 0;
-  lines.forEach(l => {
-    const pct = parseFloat(v(l.pct)) || 0;
+  rows.forEach(r => {
+    const pct = parseFloat(v(r.pct)) || 0;
     const amt = price * pct / 100;
-    document.getElementById(l.amt).value = amt > 0 ? amt.toFixed(2) : '';
-    document.getElementById(l.disp).textContent = fmt$(amt);
+    document.getElementById(r.amt).value = amt > 0 ? amt.toFixed(2) : '';
+    document.getElementById(r.disp).textContent = fmt$(amt);
     total += amt;
   });
-
-  // Rebate (optional, negative from total)
-  const rebateEnabled = document.getElementById('rebate_enabled').checked;
-  let rebateAmt = 0;
-  if (rebateEnabled) {
-    const rebatePct = parseFloat(v('rebate_pct')) || 0;
-    rebateAmt = price * rebatePct / 100;
-    document.getElementById('rebate_amt').value = rebateAmt > 0 ? rebateAmt.toFixed(2) : '';
-    document.getElementById('rebate_nets_display').textContent = fmt$(rebateAmt);
-    total += rebateAmt;
+  if (document.getElementById('rebate_enabled').checked) {
+    const rPct = parseFloat(v('rebate_pct')) || 0;
+    const rAmt = price * rPct / 100;
+    document.getElementById('rebate_amt').value = rAmt > 0 ? rAmt.toFixed(2) : '';
+    document.getElementById('rebate_nets_display').textContent = fmt$(rAmt);
+    total += rAmt;
   }
-
-  document.getElementById('total_comm_display').innerHTML = '<strong>' + fmt$(total) + '</strong>';
-  update();
-}
-
-// ── Summary ───────────────────────────────────────────────────────────────────
-function update() {
+  document.getElementById('total_comm_display').textContent = fmt$(total);
   if (currentStep === 4) { buildSummary(); buildPDFPreview(); }
 }
 
+function update() { if (currentStep === 4) { buildSummary(); buildPDFPreview(); } }
+
+// ── Summary ───────────────────────────────────────────────────────────────────
 function buildSummary() {
-  const agentAmt = document.getElementById('agent_comm_amt')?.value || '0';
-  const totalEl  = document.getElementById('total_comm_display')?.textContent || '—';
+  const agAmt = document.getElementById('agent_comm_amt')?.value || '0';
   const items = [
-    ['Seller', v('seller_name') || '—'],
-    ['Buyer', v('buyer_name') || '—'],
-    ['Property', v('prop_address') ? v('prop_address') + ', ' + v('prop_city') : '—'],
-    ['Sales Price', fmt$(v('sales_price'))],
-    ['Closing Date', fmtDate(v('closing_date'))],
-    ['Commission Side', commType === 'listing' ? 'Listing Side' : "Buyer Side"],
-    ['Agent Commission', (v('agent_comm_pct') ? v('agent_comm_pct') + '% · ' : '') + fmt$(agentAmt)],
-    ['Agent', getAgentName() || '—'],
-    ['Brokerage', 'KEY CONNECT'],
-    ['Escrow #', v('escrow_num') || '—'],
+    ['Seller',            v('seller_name')  || '—'],
+    ['Buyer',             v('buyer_name')   || '—'],
+    ['Property',          v('prop_address') ? v('prop_address') + ', ' + v('prop_city') : '—'],
+    ['Sales Price',       fmt$(v('sales_price'))],
+    ['Closing Date',      fmtDate(v('closing_date'))],
+    ['Commission Side',   commType === 'listing' ? 'Listing Side' : 'Buyer Side'],
+    ['Agent Commission',  (v('agent_comm_pct') ? v('agent_comm_pct') + '% · ' : '') + fmt$(agAmt)],
+    ['Agent',             getAgentName() || '—'],
+    ['Brokerage',         'KEY CONNECT'],
+    ['Escrow #',          v('escrow_num')   || '—'],
   ];
-  document.getElementById('summary-grid').innerHTML = items.map(([l, val]) =>
+  document.getElementById('summary-grid').innerHTML = items.map(([l,val]) =>
     `<div class="summary-item"><div class="summary-label">${l}</div><div class="summary-value">${val}</div></div>`
   ).join('');
 }
 
 // ── PDF Build ─────────────────────────────────────────────────────────────────
 function buildPDFPreview() {
-  const today = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  const today    = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
   const propFull = [v('prop_address'), v('prop_city'), 'Texas', v('prop_zip')].filter(Boolean).join(', ');
-  const agentAmt   = parseFloat(document.getElementById('agent_comm_amt')?.value) || 0;
-  const brokerAmt  = parseFloat(document.getElementById('broker_comm_amt')?.value) || 0;
-  const otherAmt   = parseFloat(document.getElementById('other_comm_amt')?.value) || 0;
-  const rebateEnabled = document.getElementById('rebate_enabled').checked;
-  const rebateAmt  = rebateEnabled ? (parseFloat(document.getElementById('rebate_amt')?.value) || 0) : 0;
-  const totalAmt   = agentAmt + brokerAmt + otherAmt + rebateAmt;
-  const agentName    = getAgentName();
-  const agentLicense = getAgentLicense();
-  const agentPhone   = getAgentPhone();
-  const agentEmail   = getAgentEmail();
-  const sideLabel    = commType === 'listing' ? "Listing Side - Seller's Agent Commission" : "Buyer Side - Buyer's Agent Commission";
+  const agAmt    = parseFloat(document.getElementById('agent_comm_amt')?.value)  || 0;
+  const brAmt    = parseFloat(document.getElementById('broker_comm_amt')?.value) || 0;
+  const otAmt    = parseFloat(document.getElementById('other_comm_amt')?.value)  || 0;
+  const rbOn     = document.getElementById('rebate_enabled').checked;
+  const rbAmt    = rbOn ? (parseFloat(document.getElementById('rebate_amt')?.value) || 0) : 0;
+  const total    = agAmt + brAmt + otAmt + rbAmt;
+  const sideLabel = commType === 'listing' ? "Listing Side - Seller's Agent Commission" : "Buyer Side - Buyer's Agent Commission";
 
-  // Build optional rows
-  let brokerRow = '', otherRow = '', rebateRow = '';
-  if (brokerAmt > 0) {
-    brokerRow = `<tr><td>Brokerage Fee</td><td>${v('broker_comm_pct') ? v('broker_comm_pct') + '%' : '—'}</td><td>${fmt$(brokerAmt)}</td><td>${v('broker_comm_to') || 'KEY CONNECT'}</td></tr>`;
-  }
-  if (otherAmt > 0) {
-    otherRow = `<tr><td>${v('other_comm_to') ? v('other_comm_to') : 'Other / Referral'}</td><td>${v('other_comm_pct') ? v('other_comm_pct') + '%' : '—'}</td><td>${fmt$(otherAmt)}</td><td>${v('other_comm_to') || '—'}</td></tr>`;
-  }
-  if (rebateEnabled && rebateAmt > 0) {
-    rebateRow = `<tr style="background:#fff8f0"><td><strong>Buyer Rebate</strong></td><td>${v('rebate_pct') ? v('rebate_pct') + '%' : '—'}</td><td>${fmt$(rebateAmt)}</td><td>${v('rebate_to') || v('buyer_name') || 'Buyer'}</td></tr>`;
-  }
+  // Optional rows — only show if amount > 0
+  const brRow = brAmt > 0 ? `<tr><td>Brokerage Fee</td><td>${v('broker_comm_pct') || '—'}%</td><td>${fmt$(brAmt)}</td><td>${v('broker_comm_to') || 'KEY CONNECT'}</td></tr>` : '';
+  const otRow = otAmt > 0 ? `<tr><td>${v('other_comm_to') || 'Other / Referral'}</td><td>${v('other_comm_pct') || '—'}%</td><td>${fmt$(otAmt)}</td><td>${v('other_comm_to') || '—'}</td></tr>` : '';
+  const rbRow = (rbOn && rbAmt > 0) ? `<tr style="background:#fff8f0"><td><strong>Buyer Rebate</strong></td><td>${v('rebate_pct') || '—'}%</td><td>${fmt$(rbAmt)}</td><td>${v('rebate_to') || v('buyer_name') || 'Buyer'}</td></tr>` : '';
+
+  // Signature — use saved image if available, else blank line
+  const sigHtml = brokerSigImg
+    ? `<img src="${brokerSigImg}" style="height:58px;max-width:320px;display:block;margin-bottom:4px;object-fit:contain;object-position:left bottom">`
+    : `<div class="pdf-sig-line"></div>`;
 
   document.getElementById('pdf-preview').innerHTML = `<div id="pdf-doc">
     <div class="pdf-header">
       <div>
         <div class="pdf-logo">KEY <span>CONNECT</span></div>
-        <div class="pdf-brokerage-sub">KEY CONNECT · Texas Real Estate</div>
+        <div class="pdf-brokerage-sub">KEY CONNECT &middot; Texas Real Estate</div>
       </div>
       <div class="pdf-doc-meta">
         Date Prepared<strong>${today}</strong>
@@ -584,18 +647,18 @@ function buildPDFPreview() {
     <div class="pdf-sec">
       <div class="pdf-sec-title">Property Information</div>
       <div class="pdf-row three">
-        <div class="pdf-f"><div class="pdf-fl">Property Address</div><div class="pdf-fv">${propFull || '&nbsp;'}</div></div>
-        <div class="pdf-f"><div class="pdf-fl">County</div><div class="pdf-fv">${v('prop_county') || '&nbsp;'}</div></div>
-        <div class="pdf-f"><div class="pdf-fl">MLS #</div><div class="pdf-fv">${v('prop_mls') || '&nbsp;'}</div></div>
+        <div><div class="pdf-fl">Property Address</div><div class="pdf-fv">${propFull || '&nbsp;'}</div></div>
+        <div><div class="pdf-fl">County</div><div class="pdf-fv">${v('prop_county') || '&nbsp;'}</div></div>
+        <div><div class="pdf-fl">MLS #</div><div class="pdf-fv">${v('prop_mls') || '&nbsp;'}</div></div>
       </div>
       <div class="pdf-row" style="margin-top:8px">
-        <div class="pdf-f"><div class="pdf-fl">Legal Description</div><div class="pdf-fv">${v('prop_legal') || '&nbsp;'}</div></div>
-        <div class="pdf-f"><div class="pdf-fl">Title Company &middot; Officer</div><div class="pdf-fv">${v('title_company') || '&nbsp;'}${v('title_officer') ? ' &middot; ' + v('title_officer') : ''}</div></div>
+        <div><div class="pdf-fl">Legal Description</div><div class="pdf-fv">${v('prop_legal') || '&nbsp;'}</div></div>
+        <div><div class="pdf-fl">Title Company &middot; Officer</div><div class="pdf-fv">${v('title_company') || '&nbsp;'}${v('title_officer') ? ' &middot; ' + v('title_officer') : ''}</div></div>
       </div>
       <div class="pdf-row" style="margin-top:8px">
-        <div class="pdf-f"><div class="pdf-fl">Sales Price</div><div class="pdf-fv" style="font-weight:700">${fmt$(v('sales_price'))}</div></div>
-        <div class="pdf-f"><div class="pdf-fl">Contract Date</div><div class="pdf-fv">${fmtDate(v('contract_date'))}</div></div>
-        <div class="pdf-f"><div class="pdf-fl">Closing Date</div><div class="pdf-fv" style="font-weight:700;color:#1e3a5f">${fmtDate(v('closing_date'))}</div></div>
+        <div><div class="pdf-fl">Sales Price</div><div class="pdf-fv" style="font-weight:700">${fmt$(v('sales_price'))}</div></div>
+        <div><div class="pdf-fl">Contract Date</div><div class="pdf-fv">${fmtDate(v('contract_date'))}</div></div>
+        <div><div class="pdf-fl">Closing Date</div><div class="pdf-fv" style="font-weight:700;color:#1e3a5f">${fmtDate(v('closing_date'))}</div></div>
       </div>
     </div>
 
@@ -603,93 +666,48 @@ function buildPDFPreview() {
       <div class="pdf-sec-title">Parties</div>
       <div class="pdf-row">
         <div>
-          <div class="pdf-fl">Seller(s)</div>
-          <div class="pdf-fv">${v('seller_name') || '&nbsp;'}</div>
+          <div class="pdf-fl">Seller(s)</div><div class="pdf-fv">${v('seller_name') || '&nbsp;'}</div>
           <div style="font-size:10px;color:#8a8278;margin-top:2px">${v('seller_address') || ''}</div>
-          <div style="font-size:10px;color:#8a8278">${[v('seller_phone'), v('seller_email')].filter(Boolean).join(' &middot; ')}</div>
+          <div style="font-size:10px;color:#8a8278">${[v('seller_phone'),v('seller_email')].filter(Boolean).join(' &middot; ')}</div>
         </div>
         <div>
-          <div class="pdf-fl">Buyer(s)</div>
-          <div class="pdf-fv">${v('buyer_name') || '&nbsp;'}</div>
+          <div class="pdf-fl">Buyer(s)</div><div class="pdf-fv">${v('buyer_name') || '&nbsp;'}</div>
           <div style="font-size:10px;color:#8a8278;margin-top:2px">${v('buyer_address') || ''}</div>
-          <div style="font-size:10px;color:#8a8278">${[v('buyer_phone'), v('buyer_email')].filter(Boolean).join(' &middot; ')}</div>
+          <div style="font-size:10px;color:#8a8278">${[v('buyer_phone'),v('buyer_email')].filter(Boolean).join(' &middot; ')}</div>
         </div>
       </div>
     </div>
 
     <div class="pdf-sec">
       <div class="pdf-sec-title">Commission Distribution</div>
-      <p style="font-size:10px;color:#555;margin-bottom:10px">
-        The title company is hereby authorized to disburse from closing proceeds the following commissions:
-      </p>
+      <p style="font-size:10px;color:#555;margin-bottom:10px">The title company is authorized to disburse from closing proceeds the following commissions:</p>
       <table class="pdf-comm-table">
-        <thead>
-          <tr>
-            <th>Line Item</th>
-            <th>% of Sale</th>
-            <th>Amount</th>
-            <th>Payable To</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Line Item</th><th>% of Sale</th><th>Amount</th><th>Payable To</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Agent Commission</strong></td>
-            <td>${v('agent_comm_pct') ? v('agent_comm_pct') + '%' : '—'}</td>
-            <td><strong>${fmt$(agentAmt)}</strong></td>
-            <td>${v('agent_comm_to') || 'KEY CONNECT'}</td>
-          </tr>
-          ${brokerRow}
-          ${otherRow}
-          ${rebateRow}
-          <tr class="total-row">
-            <td colspan="2"><strong>TOTAL COMMISSION</strong></td>
-            <td><strong>${fmt$(totalAmt)}</strong></td>
-            <td></td>
-          </tr>
+          <tr><td><strong>Agent Commission</strong></td><td>${v('agent_comm_pct') || '—'}%</td><td><strong>${fmt$(agAmt)}</strong></td><td>${v('agent_comm_to') || 'KEY CONNECT'}</td></tr>
+          ${brRow}${otRow}${rbRow}
+          <tr class="total-row"><td colspan="2"><strong>TOTAL COMMISSION</strong></td><td><strong>${fmt$(total)}</strong></td><td></td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="pdf-sec">
-      <div class="pdf-sec-title">Agent & Brokerage</div>
+      <div class="pdf-sec-title">Agent &amp; Brokerage</div>
       <div class="pdf-agent-row">
-        <div>
-          <div class="pdf-agent-label">Agent Name</div>
-          <div class="pdf-agent-val">${agentName || '&nbsp;'}</div>
-        </div>
-        <div>
-          <div class="pdf-agent-label">TREC License #</div>
-          <div class="pdf-agent-val">${agentLicense || '&nbsp;'}</div>
-        </div>
-        <div>
-          <div class="pdf-agent-label">Brokerage</div>
-          <div class="pdf-agent-val">KEY CONNECT</div>
-          <div class="pdf-agent-sub">Texas Real Estate Brokerage</div>
-        </div>
-        <div>
-          <div class="pdf-agent-label">Contact</div>
-          <div class="pdf-agent-val">${agentPhone || '&nbsp;'}</div>
-          <div class="pdf-agent-sub">${agentEmail || '&nbsp;'}</div>
-        </div>
+        <div><div class="pdf-agent-label">Agent Name</div><div class="pdf-agent-val">${getAgentName() || '&nbsp;'}</div></div>
+        <div><div class="pdf-agent-label">TREC License #</div><div class="pdf-agent-val">${getAgentLicense() || '&nbsp;'}</div></div>
+        <div><div class="pdf-agent-label">Brokerage</div><div class="pdf-agent-val">KEY CONNECT</div><div class="pdf-agent-sub">Texas Real Estate</div></div>
+        <div><div class="pdf-agent-label">Contact</div><div class="pdf-agent-val">${getAgentPhone() || '&nbsp;'}</div><div class="pdf-agent-sub">${getAgentEmail() || '&nbsp;'}</div></div>
       </div>
     </div>
 
     <div class="pdf-sig-section">
       <div class="pdf-sig-title">Broker Authorization</div>
-      <p class="pdf-auth-text">
-        The undersigned Broker hereby authorizes disbursement of the above commission upon successful closing of the referenced property in accordance with the executed representation agreement.
-      </p>
-      <div class="pdf-sig-grid">
-        <div class="pdf-sig-block">
-          <div class="pdf-sig-line"></div>
-          <div class="pdf-sig-name">KEY CONNECT &mdash; Authorized Broker</div>
-          <div class="pdf-sig-label">Broker Signature &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date</div>
-        </div>
-        <div class="pdf-sig-block">
-          <div class="pdf-sig-line"></div>
-          <div class="pdf-sig-name">${agentName || '________________________________'}</div>
-          <div class="pdf-sig-label">Agent Signature &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date</div>
-        </div>
+      <p class="pdf-auth-text">The undersigned Broker hereby authorizes disbursement of the above commission upon successful closing of the referenced property in accordance with the executed representation agreement.</p>
+      <div style="max-width:460px">
+        ${sigHtml}
+        <div class="pdf-sig-name">KEY CONNECT &mdash; Authorized Broker</div>
+        <div class="pdf-sig-label">Broker Signature &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date</div>
       </div>
     </div>
 
@@ -710,7 +728,7 @@ function printCDA() {
   const content = document.getElementById('pdf-doc').innerHTML;
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html><head>
-    <meta charset="UTF-8"><title>CDA - KEY CONNECT - ${v('prop_address') || 'Transaction'}</title>
+    <meta charset="UTF-8"><title>CDA - KEY CONNECT</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -731,7 +749,7 @@ function printCDA() {
     .pdf-row.three{grid-template-columns:1fr 1fr 1fr}
     .pdf-fl{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#8a8278;margin-bottom:1pt}
     .pdf-fv{font-size:10pt;border-bottom:1px solid #d0ccc4;padding-bottom:2pt;min-height:16pt}
-    .pdf-comm-table{width:100%;border-collapse:collapse;margin-top:6pt}
+    .pdf-comm-table{width:100%;border-collapse:collapse}
     .pdf-comm-table th{font-size:8pt;font-weight:700;text-transform:uppercase;background:#1e3a5f;color:#fff;padding:6pt 8pt;text-align:left}
     .pdf-comm-table td{padding:6pt 8pt;border-bottom:1px solid #e8e3db;font-size:10pt}
     .pdf-comm-table .total-row{background:#f5f3ef;font-weight:700;color:#1e3a5f;border-top:2px solid #1e3a5f}
@@ -742,10 +760,9 @@ function printCDA() {
     .pdf-agent-sub{font-size:9pt;color:#8a8278}
     .pdf-sig-section{margin-top:18pt;padding-top:12pt;border-top:2px solid #1e3a5f}
     .pdf-sig-title{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#1e3a5f;margin-bottom:8pt}
-    .pdf-auth-text{font-size:9pt;color:#555;margin-bottom:10pt;line-height:1.5}
-    .pdf-sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:22pt}
-    .pdf-sig-line{border-bottom:1.5px solid #1a1714;height:38pt;margin-bottom:3pt}
-    .pdf-sig-name{font-size:9pt;color:#555;margin-bottom:1pt}
+    .pdf-auth-text{font-size:9pt;color:#555;margin-bottom:12pt;line-height:1.5}
+    .pdf-sig-line{border-bottom:1.5px solid #1a1714;height:52pt;margin-bottom:3pt}
+    .pdf-sig-name{font-size:9pt;color:#555;font-weight:600;margin-bottom:1pt}
     .pdf-sig-label{font-size:8pt;color:#8a8278}
     .pdf-footer{margin-top:14pt;padding-top:8pt;border-top:1px solid #e8e3db;font-size:8pt;color:#8a8278;text-align:center;line-height:1.6}
     </style>
@@ -757,14 +774,14 @@ function printCDA() {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.getElementById('contract_date').value = new Date().toISOString().split('T')[0];
-document.getElementById('agent_comm_to').value = 'KEY CONNECT';
 refreshMyInfoBox();
 setMode('me');
+initSigCanvas();
 if (myInfo.name) {
-  document.getElementById('my_name').value = myInfo.name;
+  document.getElementById('my_name').value    = myInfo.name;
   document.getElementById('my_license').value = myInfo.license || '';
-  document.getElementById('my_phone').value = myInfo.phone || '';
-  document.getElementById('my_email').value = myInfo.email || '';
+  document.getElementById('my_phone').value   = myInfo.phone   || '';
+  document.getElementById('my_email').value   = myInfo.email   || '';
 }
 </script>
 </body>
