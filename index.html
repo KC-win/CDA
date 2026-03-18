@@ -168,6 +168,46 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .pdf-sig-label{font-size:9px;color:#8a8278}
 .pdf-footer{margin-top:18px;padding-top:10px;border-top:1px solid #e8e3db;font-size:9px;color:#8a8278;text-align:center;line-height:1.6}
 
+/* ── INVOICE MODULE ─────────────────────────────────────────────────────── */
+.inv-top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.inv-num-badge{background:rgba(30,58,95,.07);border:1.5px solid rgba(30,58,95,.15);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.5px}
+.inv-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;background:rgba(201,151,58,.12);color:var(--accent2);border:1px solid rgba(201,151,58,.3)}
+
+/* Line items table */
+.inv-table{width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
+.inv-table th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#fff;background:var(--accent);padding:10px 12px;text-align:left}
+.inv-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.inv-table tr:last-child td{border-bottom:none}
+.inv-table tr:nth-child(even) td{background:var(--surface2)}
+.inv-table input,.inv-table select{font-family:var(--font);font-size:13px;padding:7px 10px;background:#fff;border:1.5px solid var(--border);border-radius:6px;color:var(--text);outline:none;width:100%;transition:border-color .2s}
+.inv-table input:focus,.inv-table select:focus{border-color:var(--accent)}
+.inv-table .del-btn{width:28px;height:28px;border-radius:6px;border:none;background:rgba(231,76,60,.1);color:#e74c3c;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;margin:auto}
+.inv-table .del-btn:hover{background:rgba(231,76,60,.2)}
+
+.inv-totals{margin-left:auto;max-width:280px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.inv-totals-row{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.inv-totals-row:last-child{border-bottom:none;background:var(--accent);color:#fff;font-weight:700;font-size:15px}
+.inv-totals-row.tax-row{background:var(--surface2)}
+
+.add-line-btn{display:flex;align-items:center;gap:7px;font-family:var(--font);font-size:13px;font-weight:600;padding:9px 18px;border-radius:8px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;margin-bottom:20px}
+.add-line-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Invoice PDF preview */
+#inv-pdf-preview{display:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:44px;font-size:12px;line-height:1.55;color:#1a1714;box-shadow:0 4px 24px rgba(0,0,0,.08);margin-top:20px}
+#inv-pdf-preview.visible{display:block}
+.inv-pdf-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:14px;margin-bottom:18px;border-bottom:3px solid #1e3a5f}
+.inv-pdf-to{background:#f9f8f6;border:1px solid #e8e3db;border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.inv-pdf-to-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8a8278;margin-bottom:6px}
+.inv-pdf-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.inv-pdf-table th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;background:#1e3a5f;color:#fff;padding:7px 10px;text-align:left}
+.inv-pdf-table td{padding:8px 10px;border-bottom:1px solid #e8e3db;font-size:11px}
+.inv-pdf-table tr:nth-child(even) td{background:#faf9f7}
+.inv-pdf-totals{margin-left:auto;max-width:240px}
+.inv-pdf-totals-row{display:flex;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e3db;font-size:11px}
+.inv-pdf-totals-row.grand{background:#1e3a5f;color:#fff;font-weight:700;font-size:13px;border-radius:0 0 6px 6px}
+.inv-pdf-notes{background:#f9f8f6;border:1px solid #e8e3db;border-radius:6px;padding:12px;font-size:11px;color:#555;margin-top:14px;line-height:1.6}
+.inv-pdf-footer{margin-top:18px;padding-top:10px;border-top:1px solid #e8e3db;font-size:9px;color:#8a8278;text-align:center;line-height:1.6}
+
 @media(max-width:600px){
   .form-grid,.form-grid.three{grid-template-columns:1fr}
   .col-span-2{grid-column:span 1}
@@ -214,6 +254,15 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
   <!-- Mode toggle -->
   <div class="mode-toggle">
+    <button class="mode-btn active" id="mode-cda" onclick="setAppMode('cda')">📄 CDA Generator</button>
+    <button class="mode-btn" id="mode-invoice" onclick="setAppMode('invoice')">🧾 Invoice Generator</button>
+  </div>
+
+  <!-- CDA Panel -->
+  <div id="cda-panel">
+
+  <!-- Agent Mode toggle -->
+  <div class="mode-toggle" style="margin-bottom:28px">
     <button class="mode-btn active" id="mode-me" onclick="setMode('me')">👤 My CDA (Default)</button>
     <button class="mode-btn" id="mode-other" onclick="setMode('other')">🔄 Different Agent</button>
   </div>
@@ -411,18 +460,128 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     <div id="pdf-preview"></div>
   </div>
 
-</div>
+  </div><!-- end cda-panel -->
+
+  <!-- ── INVOICE PANEL ─────────────────────────────────────────────── -->
+  <div id="invoice-panel" style="display:none">
+
+    <div class="card">
+      <div class="card-title">🧾 Invoice</div>
+      <div class="card-sub">Create a professional invoice for lease, referral, or service fees.</div>
+
+      <!-- Invoice meta -->
+      <div class="inv-top-bar">
+        <div class="inv-num-badge">Invoice # <span id="inv-num-display">KC-001</span></div>
+        <div class="inv-status">● Draft</div>
+      </div>
+
+      <div class="form-grid three" style="margin-bottom:20px">
+        <div class="field"><label>Invoice Number</label><input id="inv_num" value="KC-001" oninput="document.getElementById('inv-num-display').textContent=this.value;invUpdate()"></div>
+        <div class="field"><label>Invoice Date</label><input id="inv_date" type="date" oninput="invUpdate()"></div>
+        <div class="field"><label>Due Date</label><input id="inv_due" type="date" oninput="invUpdate()"></div>
+      </div>
+
+      <div class="section-divider"><span>From (Your Info)</span></div>
+      <div class="form-grid" style="margin-bottom:20px">
+        <div class="field"><label>Company / Agent Name</label><input id="inv_from_name" placeholder="KEY CONNECT Realty" oninput="invUpdate()"></div>
+        <div class="field"><label>License / DBA</label><input id="inv_from_license" placeholder="TREC #0123456" oninput="invUpdate()"></div>
+        <div class="field"><label>Phone</label><input id="inv_from_phone" placeholder="(512) 555-0000" oninput="invUpdate()"></div>
+        <div class="field"><label>Email</label><input id="inv_from_email" placeholder="you@keyconnect.com" oninput="invUpdate()"></div>
+        <div class="field col-span-2"><label>Address</label><input id="inv_from_address" placeholder="123 Main St, Austin, TX 78701" oninput="invUpdate()"></div>
+      </div>
+
+      <div class="section-divider"><span>Bill To</span></div>
+      <div class="form-grid" style="margin-bottom:20px">
+        <div class="field"><label>Client / Brokerage Name</label><input id="inv_to_name" placeholder="ABC Property Management" oninput="invUpdate()"></div>
+        <div class="field"><label>Contact Person</label><input id="inv_to_contact" placeholder="John Smith" oninput="invUpdate()"></div>
+        <div class="field"><label>Phone</label><input id="inv_to_phone" placeholder="(512) 555-0100" oninput="invUpdate()"></div>
+        <div class="field"><label>Email</label><input id="inv_to_email" placeholder="client@email.com" oninput="invUpdate()"></div>
+        <div class="field col-span-2"><label>Address</label><input id="inv_to_address" placeholder="456 Oak Ave, Austin, TX 78702" oninput="invUpdate()"></div>
+      </div>
+
+      <div class="section-divider"><span>Property / Reference</span></div>
+      <div class="form-grid" style="margin-bottom:24px">
+        <div class="field col-span-2"><label>Property Address</label><input id="inv_property" placeholder="789 Elm St, Austin, TX 78703" oninput="invUpdate()"></div>
+        <div class="field"><label>Service Type</label>
+          <select id="inv_service_type" oninput="invUpdate()">
+            <option value="Lease Commission">Lease Commission</option>
+            <option value="Referral Fee">Referral Fee</option>
+            <option value="Property Management">Property Management</option>
+            <option value="Consulting Fee">Consulting Fee</option>
+            <option value="Administrative Fee">Administrative Fee</option>
+            <option value="Other Services">Other Services</option>
+          </select>
+        </div>
+        <div class="field"><label>Reference / File #</label><input id="inv_ref" placeholder="REF-2025-001" oninput="invUpdate()"></div>
+      </div>
+
+      <div class="section-divider"><span>Line Items</span></div>
+      <table class="inv-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Description</th>
+            <th style="width:12%">Qty</th>
+            <th style="width:18%">Rate ($)</th>
+            <th style="width:18%">Amount ($)</th>
+            <th style="width:10%"></th>
+          </tr>
+        </thead>
+        <tbody id="inv-line-items">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+      <button class="add-line-btn" onclick="addInvLine()">＋ Add Line Item</button>
+
+      <!-- Tax toggle -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <label class="opt-toggle">
+          <input type="checkbox" id="inv_tax_enabled" onchange="invUpdate()">
+          Apply Tax / Fee
+        </label>
+        <input id="inv_tax_pct" type="number" step="0.01" placeholder="Tax %" style="width:100px;font-family:var(--font);font-size:13px;padding:7px 10px;background:var(--surface2);border:1.5px solid var(--border);border-radius:6px;color:var(--text);outline:none" oninput="invUpdate()">
+        <span style="font-size:12px;color:var(--muted)">% (optional)</span>
+      </div>
+
+      <!-- Totals -->
+      <div class="inv-totals">
+        <div class="inv-totals-row"><span>Subtotal</span><span id="inv-subtotal">$0.00</span></div>
+        <div class="inv-totals-row tax-row" id="inv-tax-row" style="display:none"><span>Tax / Fee</span><span id="inv-tax-amt">$0.00</span></div>
+        <div class="inv-totals-row"><span>TOTAL DUE</span><span id="inv-total">$0.00</span></div>
+      </div>
+
+      <div class="section-divider" style="margin-top:20px"><span>Notes</span></div>
+      <div class="field" style="margin-bottom:24px">
+        <label>Payment Notes / Terms</label>
+        <input id="inv_notes" placeholder="e.g. Payment due within 30 days of invoice date. Make checks payable to KEY CONNECT." oninput="invUpdate()">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="invUpdate()">🔄 Refresh Preview</button>
+        <button class="btn btn-gold" onclick="printInvoice()">⬇ Download PDF</button>
+        <button class="btn btn-green" onclick="printInvoice()">🖨 Print Invoice</button>
+      </div>
+    </div>
+
+    <!-- Invoice PDF Preview -->
+    <div id="inv-pdf-preview"></div>
+
+  </div><!-- end invoice-panel -->
+
+</div><!-- end app -->
 
 <script>
+
 const MY_KEY  = 'kc_my_agent_info';
 const SIG_KEY = 'kc_broker_sig';
-let myInfo      = JSON.parse(localStorage.getItem(MY_KEY) || '{}');
+let myInfo       = JSON.parse(localStorage.getItem(MY_KEY) || '{}');
 let brokerSigImg = localStorage.getItem(SIG_KEY) || '';
-let agentMode   = 'me';
-let commType    = 'listing';
-let currentStep = 1;
-let sigDrawing  = false;
+let agentMode    = 'me';
+let appMode      = 'cda';
+let commType     = 'listing';
+let currentStep  = 1;
+let sigDrawing   = false;
 let sigCanvas, sigCtx;
+let invLines     = [{ desc: '', qty: 1, rate: '' }];
 
 // ── Broker Signature Canvas ───────────────────────────────────────────────────
 function initSigCanvas() {
@@ -772,10 +931,178 @@ function printCDA() {
   setTimeout(() => w.print(), 800);
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// ── App Mode (CDA vs Invoice) ─────────────────────────────────────────────────
+function setAppMode(mode) {
+  appMode = mode;
+  document.getElementById('mode-cda').classList.toggle('active', mode === 'cda');
+  document.getElementById('mode-invoice').classList.toggle('active', mode === 'invoice');
+  document.getElementById('cda-panel').style.display = mode === 'cda' ? 'block' : 'none';
+  document.getElementById('invoice-panel').style.display = mode === 'invoice' ? 'block' : 'none';
+  if (mode === 'invoice') { initInvoice(); invUpdate(); }
+}
+
+// ── Invoice Module ────────────────────────────────────────────────────────────
+function initInvoice() {
+  const today = new Date().toISOString().split('T')[0];
+  const due = new Date(); due.setDate(due.getDate() + 30);
+  const dueStr = due.toISOString().split('T')[0];
+  if (!document.getElementById('inv_date').value) document.getElementById('inv_date').value = today;
+  if (!document.getElementById('inv_due').value)  document.getElementById('inv_due').value  = dueStr;
+  // Pre-fill from saved agent info
+  if (myInfo.name && !document.getElementById('inv_from_name').value) {
+    document.getElementById('inv_from_name').value    = myInfo.name;
+    document.getElementById('inv_from_phone').value   = myInfo.phone || '';
+    document.getElementById('inv_from_email').value   = myInfo.email || '';
+    document.getElementById('inv_from_license').value = myInfo.license || '';
+  }
+  renderInvLines();
+}
+
+function renderInvLines() {
+  const tbody = document.getElementById('inv-line-items');
+  tbody.innerHTML = invLines.map((ln, i) => `
+    <tr>
+      <td><input value="${esc2(ln.desc)}" placeholder="e.g. Lease commission — 789 Elm St" oninput="invLines[${i}].desc=this.value;invUpdate()"></td>
+      <td><input type="number" value="${ln.qty}" min="1" step="1" style="width:60px" oninput="invLines[${i}].qty=parseFloat(this.value)||1;invUpdate()"></td>
+      <td><input type="number" value="${ln.rate}" placeholder="0.00" step="0.01" oninput="invLines[${i}].rate=parseFloat(this.value)||0;invUpdate()"></td>
+      <td><input readonly value="${fmtInv$((parseFloat(ln.qty)||1)*(parseFloat(ln.rate)||0))}"></td>
+      <td><button class="del-btn" onclick="removeInvLine(${i})" title="Remove">✕</button></td>
+    </tr>`).join('');
+}
+
+function addInvLine() {
+  invLines.push({ desc: '', qty: 1, rate: '' });
+  renderInvLines();
+}
+
+function removeInvLine(i) {
+  if (invLines.length === 1) { invLines[0] = { desc:'', qty:1, rate:'' }; renderInvLines(); invUpdate(); return; }
+  invLines.splice(i, 1);
+  renderInvLines();
+  invUpdate();
+}
+
+function invUpdate() {
+  renderInvLines();
+  const subtotal = invLines.reduce((s, ln) => s + (parseFloat(ln.qty)||1)*(parseFloat(ln.rate)||0), 0);
+  const taxOn = document.getElementById('inv_tax_enabled').checked;
+  const taxPct = parseFloat(document.getElementById('inv_tax_pct').value) || 0;
+  const taxAmt = taxOn ? subtotal * taxPct / 100 : 0;
+  const total = subtotal + taxAmt;
+  document.getElementById('inv-subtotal').textContent = fmtInv$(subtotal);
+  document.getElementById('inv-tax-row').style.display = taxOn ? 'flex' : 'none';
+  document.getElementById('inv-tax-amt').textContent = fmtInv$(taxAmt);
+  document.getElementById('inv-total').textContent = fmtInv$(total);
+  buildInvPreview(subtotal, taxAmt, taxPct, total, taxOn);
+}
+
+function fmtInv$(n) { return '$' + (parseFloat(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function esc2(s) { return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function invV(id) { return (document.getElementById(id)?.value||'').trim(); }
+function fmtInvDate(d) { if(!d)return'—'; return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); }
+
+function buildInvPreview(subtotal, taxAmt, taxPct, total, taxOn) {
+  const lineRows = invLines.map(ln => {
+    const amt = (parseFloat(ln.qty)||1)*(parseFloat(ln.rate)||0);
+    return `<tr><td>${ln.desc||'—'}</td><td style="text-align:center">${ln.qty||1}</td><td style="text-align:right">${fmtInv$(ln.rate||0)}</td><td style="text-align:right;font-weight:600">${fmtInv$(amt)}</td></tr>`;
+  }).join('');
+  const taxRow = taxOn ? `<div class="inv-pdf-totals-row"><span>Tax / Fee (${taxPct}%)</span><span>${fmtInv$(taxAmt)}</span></div>` : '';
+  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const html = `<div id="inv-pdf-doc">
+    <div class="inv-pdf-header">
+      <div>
+        <div class="pdf-logo" style="font-family:'DM Serif Display',serif;font-size:22px;color:#1e3a5f">KEY <span style="color:#c9973a">CONNECT</span></div>
+        <div style="font-size:10px;color:#8a8278;text-transform:uppercase;letter-spacing:1px;margin-top:2px">Texas Real Estate</div>
+        <div style="font-size:11px;color:#555;margin-top:6px">${invV('inv_from_address')||''}</div>
+        <div style="font-size:11px;color:#555">${[invV('inv_from_phone'),invV('inv_from_email')].filter(Boolean).join(' · ')}</div>
+        ${invV('inv_from_license')?`<div style="font-size:10px;color:#8a8278;margin-top:2px">${invV('inv_from_license')}</div>`:''}
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:22px;font-weight:700;color:#1e3a5f;letter-spacing:-1px">INVOICE</div>
+        <div style="font-size:13px;font-weight:700;color:#c9973a;margin-top:4px">${invV('inv_num')||'KC-001'}</div>
+        <div style="font-size:10px;color:#8a8278;margin-top:8px;line-height:1.8">
+          Date: <strong style="color:#1a1714">${fmtInvDate(invV('inv_date'))}</strong><br>
+          Due: <strong style="color:#1e3a5f">${fmtInvDate(invV('inv_due'))}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div class="inv-pdf-to">
+        <div class="inv-pdf-to-label">From</div>
+        <div style="font-size:13px;font-weight:700;color:#1e3a5f">${invV('inv_from_name')||'KEY CONNECT'}</div>
+        <div style="font-size:11px;color:#555;margin-top:3px">${invV('inv_from_address')||''}</div>
+      </div>
+      <div class="inv-pdf-to">
+        <div class="inv-pdf-to-label">Bill To</div>
+        <div style="font-size:13px;font-weight:700;color:#1e3a5f">${invV('inv_to_name')||'—'}</div>
+        ${invV('inv_to_contact')?`<div style="font-size:11px;color:#555;margin-top:2px">Attn: ${invV('inv_to_contact')}</div>`:''}
+        <div style="font-size:11px;color:#555">${invV('inv_to_address')||''}</div>
+        <div style="font-size:11px;color:#555">${[invV('inv_to_phone'),invV('inv_to_email')].filter(Boolean).join(' · ')}</div>
+      </div>
+    </div>
+
+    ${invV('inv_property')?`<div style="background:#f0f4fa;border:1px solid #d0dcea;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:11px"><span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8a8278">Property / Reference · </span><strong>${invV('inv_property')}</strong>${invV('inv_ref')?' &nbsp;·&nbsp; Ref: <strong>'+invV('inv_ref')+'</strong>':''} &nbsp;·&nbsp; ${invV('inv_service_type')||'Service'}</div>`:''}
+
+    <table class="inv-pdf-table">
+      <thead><tr><th style="width:50%">Description</th><th style="width:10%;text-align:center">Qty</th><th style="width:20%;text-align:right">Rate</th><th style="width:20%;text-align:right">Amount</th></tr></thead>
+      <tbody>${lineRows}</tbody>
+    </table>
+
+    <div class="inv-pdf-totals">
+      <div class="inv-pdf-totals-row"><span>Subtotal</span><span>${fmtInv$(subtotal)}</span></div>
+      ${taxRow}
+      <div class="inv-pdf-totals-row grand"><span>TOTAL DUE</span><span>${fmtInv$(total)}</span></div>
+    </div>
+
+    ${invV('inv_notes')?`<div class="inv-pdf-notes"><strong>Notes / Payment Terms:</strong><br>${invV('inv_notes')}</div>`:''}
+
+    <div class="inv-pdf-footer">
+      KEY CONNECT · Texas Real Estate · Invoice ${invV('inv_num')||'KC-001'} · Generated ${today}<br>
+      ${invV('inv_property')?'Property: '+invV('inv_property')+' · ':''}This invoice is for real estate services rendered.
+    </div>
+  </div>`;
+  const el = document.getElementById('inv-pdf-preview');
+  el.innerHTML = html;
+  el.classList.add('visible');
+}
+
+function printInvoice() {
+  invUpdate();
+  const content = document.getElementById('inv-pdf-doc').innerHTML;
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head>
+    <meta charset="UTF-8"><title>Invoice ${invV('inv_num')||'KC-001'} - KEY CONNECT</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'DM Sans',sans-serif;font-size:11pt;color:#1a1714;padding:0}
+    @page{margin:.7in;size:letter}
+    .inv-pdf-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:14pt;margin-bottom:16pt;border-bottom:3px solid #1e3a5f}
+    .inv-pdf-to{background:#f9f8f6;border:1px solid #e8e3db;border-radius:5pt;padding:10pt 12pt}
+    .inv-pdf-to-label{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8a8278;margin-bottom:4pt}
+    .inv-pdf-table{width:100%;border-collapse:collapse;margin-bottom:14pt}
+    .inv-pdf-table th{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.8px;background:#1e3a5f;color:#fff;padding:6pt 8pt;text-align:left}
+    .inv-pdf-table td{padding:7pt 8pt;border-bottom:1px solid #e8e3db;font-size:10pt}
+    .inv-pdf-table tr:nth-child(even) td{background:#faf9f7}
+    .inv-pdf-totals{margin-left:auto;max-width:220pt}
+    .inv-pdf-totals-row{display:flex;justify-content:space-between;padding:5pt 8pt;border-bottom:1px solid #e8e3db;font-size:10pt}
+    .inv-pdf-totals-row.grand{background:#1e3a5f;color:#fff;font-weight:700;font-size:12pt;border-radius:0 0 4pt 4pt}
+    .inv-pdf-notes{background:#f9f8f6;border:1px solid #e8e3db;border-radius:4pt;padding:10pt;font-size:9pt;color:#555;margin-top:12pt;line-height:1.6}
+    .inv-pdf-footer{margin-top:16pt;padding-top:8pt;border-top:1px solid #e8e3db;font-size:8pt;color:#8a8278;text-align:center;line-height:1.6}
+    </style>
+  </head><body>${content}</body></html>`);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 800);
+}
+
+// ── Original App Mode Switch Init ─────────────────────────────────────────────
+
 document.getElementById('contract_date').value = new Date().toISOString().split('T')[0];
 refreshMyInfoBox();
 setMode('me');
+setAppMode('cda');
 initSigCanvas();
 if (myInfo.name) {
   document.getElementById('my_name').value    = myInfo.name;
